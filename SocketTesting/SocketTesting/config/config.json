@@ -1,0 +1,9 @@
+{
+  "Device1": {
+    "adbName": "R9PT80V1PFL",
+    "IPAddress": "192.168.1.37"
+  },
+  "packageName": "com.sugame.testing",
+  "gameWidth": 1080,
+  "gameHeight": 1920
+}

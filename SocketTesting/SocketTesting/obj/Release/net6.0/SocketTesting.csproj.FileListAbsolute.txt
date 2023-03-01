@@ -1,0 +1,15 @@
+D:\SocketTesting\SocketTesting\bin\Release\net6.0\SocketTesting.exe
+D:\SocketTesting\SocketTesting\bin\Release\net6.0\SocketTesting.deps.json
+D:\SocketTesting\SocketTesting\bin\Release\net6.0\SocketTesting.runtimeconfig.json
+D:\SocketTesting\SocketTesting\bin\Release\net6.0\SocketTesting.dll
+D:\SocketTesting\SocketTesting\bin\Release\net6.0\SocketTesting.pdb
+D:\SocketTesting\SocketTesting\obj\Release\net6.0\SocketTesting.csproj.AssemblyReference.cache
+D:\SocketTesting\SocketTesting\obj\Release\net6.0\SocketTesting.GeneratedMSBuildEditorConfig.editorconfig
+D:\SocketTesting\SocketTesting\obj\Release\net6.0\SocketTesting.AssemblyInfoInputs.cache
+D:\SocketTesting\SocketTesting\obj\Release\net6.0\SocketTesting.AssemblyInfo.cs
+D:\SocketTesting\SocketTesting\obj\Release\net6.0\SocketTesting.csproj.CoreCompileInputs.cache
+D:\SocketTesting\SocketTesting\obj\Release\net6.0\SocketTesting.dll
+D:\SocketTesting\SocketTesting\obj\Release\net6.0\refint\SocketTesting.dll
+D:\SocketTesting\SocketTesting\obj\Release\net6.0\SocketTesting.pdb
+D:\SocketTesting\SocketTesting\obj\Release\net6.0\SocketTesting.genruntimeconfig.cache
+D:\SocketTesting\SocketTesting\obj\Release\net6.0\ref\SocketTesting.dll
