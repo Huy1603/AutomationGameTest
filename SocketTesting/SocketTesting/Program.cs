@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using System.Net.Sockets;
 using System.Net;
 using System.Text;
@@ -27,17 +28,19 @@ public class WebSocket
             //IPAddress address = IPAddress.Parse("127.0.0.1");
 
             //Set up socket server
-            IPAddress address = IPAddress.Parse((string) configJSON["Device"]["IPAddress"]);
+/*            IPAddress address = IPAddress.Parse((string) configJSON["Device"]["IPAddress"]);
             client.Connect(address, PORT_NUMBER);
-            stream = client.GetStream();
-
-            string excelFilepath = Directory.GetCurrentDirectory() + "\\ExcelFile\\TestCase.xlsx";
+            stream = client.GetStream();*/
+            string currentDirectory = Directory.GetParent(Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).FullName).FullName).FullName;
+            Console.WriteLine(currentDirectory);
+            string excelFilepath = currentDirectory + "\\excelfile\\ExcelFile.xlsx";
             try
             {
                 ReadAndExecuteExcel.readExcel(excelFilepath);
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 throw new Exception("can not find input excel file.");
             }
 
@@ -45,8 +48,9 @@ public class WebSocket
             {
                 BugReporter.Report();
             }
-            catch 
-            { 
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
                 throw new Exception("can not find output docx file.");
             }
             /*

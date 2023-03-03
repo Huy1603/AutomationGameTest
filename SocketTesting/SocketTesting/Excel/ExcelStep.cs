@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System.Numerics;
 using System.Diagnostics;
 using System.Reflection;
+using NPOI.SS.Formula.Functions;
 
 public class ExcelStep
 {
@@ -111,12 +112,13 @@ public class ExcelStep
         catch (Exception ex)
         {
             setEvidence();
-            throw new Exception("this is a bug.");
+            throw new Exception(this.setStepID + TestCaseSheet.bugStepIDAndDescriptionSeparator + ex);
         }
     }
 
     public override string ToString()
     {
-        return $"Step{{ id: {this.stepID}, driver: {this.driver}, action: {this.action}, params: {string.Join(paramSeparator, Params)}";
+        if(Params != null) return $"Step{{ id: {this.stepID}, driver: {this.driver}, action: {this.action}, params: {string.Join(paramSeparator, Params)}";
+        else return $"Step{{ id: {this.stepID}, driver: {this.driver}, action: {this.action}}}";
     }
 }

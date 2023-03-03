@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\SocketTesting\\SocketTesting\\SocketTesting.csproj": {}
+    "E:\\GitHub\\AutomationGameTest\\SocketTesting\\SocketTesting\\SocketTesting.csproj": {}
   },
   "projects": {
-    "D:\\SocketTesting\\SocketTesting\\SocketTesting.csproj": {
+    "E:\\GitHub\\AutomationGameTest\\SocketTesting\\SocketTesting\\SocketTesting.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SocketTesting\\SocketTesting\\SocketTesting.csproj",
+        "projectUniqueName": "E:\\GitHub\\AutomationGameTest\\SocketTesting\\SocketTesting\\SocketTesting.csproj",
         "projectName": "SocketTesting",
-        "projectPath": "D:\\SocketTesting\\SocketTesting\\SocketTesting.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\SocketTesting\\SocketTesting\\obj\\",
+        "projectPath": "E:\\GitHub\\AutomationGameTest\\SocketTesting\\SocketTesting\\SocketTesting.csproj",
+        "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
+        "outputPath": "E:\\GitHub\\AutomationGameTest\\SocketTesting\\SocketTesting\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -69,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

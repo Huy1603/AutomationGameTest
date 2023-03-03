@@ -13,7 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Evidence\" />
+    <Folder Include="evidence\" />
+    <Folder Include="report\" />
+    <Folder Include="NewFolder\" />
   </ItemGroup>
 
 </Project>

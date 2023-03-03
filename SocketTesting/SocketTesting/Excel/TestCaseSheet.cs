@@ -90,7 +90,7 @@ public class TestCaseSheet
     public static string addBug(int testCaseID, string device, string message, string evidence)
     {
         Bug bug = new Bug();
-
+        Console.WriteLine("message " + message);
         try
         {
             string bugStepID = message.Split(bugStepIDAndDescriptionSeparator, 2)[0];
@@ -102,6 +102,7 @@ public class TestCaseSheet
             return "Failed";
         } catch (Exception ex)
         {
+            Console.WriteLine(ex);
             throw new Exception("Can not get description.");
         }
     }

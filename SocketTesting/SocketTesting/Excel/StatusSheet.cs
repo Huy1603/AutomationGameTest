@@ -21,7 +21,7 @@ public class StatusSheet{
             
             ICell firstCell = row.GetCell(0);
 
-            if(firstCell == null) continue;
+            if(firstCell == null || firstCell.ToString().Equals("")) continue;
             readStatusLine(row);
         }
     }
@@ -30,7 +30,6 @@ public class StatusSheet{
     {
         ICell firstCell = row.GetCell(0);
         string curTestCase = firstCell.StringCellValue;
-       
         for(int i = 1; i < row.LastCellNum; ++i)
         {
             ICell cell = row.GetCell(i);

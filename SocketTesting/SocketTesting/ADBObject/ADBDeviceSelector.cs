@@ -8,6 +8,7 @@ public class ADBDeviceSelector
 {
     public static ADBObject GetADBObject(string name)
     {
+        Console.WriteLine(name);
         if (name.Substring(0, name.Length - 1).Equals("Device")){
             int id;
             try

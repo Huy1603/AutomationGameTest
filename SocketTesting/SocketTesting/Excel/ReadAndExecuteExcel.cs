@@ -16,6 +16,7 @@ public class ReadAndExecuteExcel
         XSSFWorkbook wb;
         try
         {
+            Console.WriteLine(excelFilePath);
             wb = getWorkbook(new FileStream(excelFilePath, FileMode.Open, FileAccess.Read));
         } catch
         {

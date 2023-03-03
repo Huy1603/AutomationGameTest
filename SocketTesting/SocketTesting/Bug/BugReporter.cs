@@ -13,12 +13,14 @@ public class BugReporter
 {
     public static FileStream reportFile;
     public static List<Bug> bugList = new List<Bug>();
-
+    public static string pathReportDate;
     public static void Report()
     {
-        string path = Directory.GetCurrentDirectory();
-        string reportDate = DateTime.Now.ToString("yyyy’-‘MM’-‘dd’T’HH’:’mm’:’ss");
-        reportFile = new FileStream(path + "\\Report\\" + reportDate + ".docx", FileMode.Create, FileAccess.Write);
+        string path = Directory.GetParent(Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).FullName).FullName).FullName;
+        string reportDate = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+        pathReportDate = path + "\\report\\" + reportDate;
+        reportFile = new FileStream(pathReportDate + ".docx", FileMode.Create, FileAccess.Write);
+        reportFile.Close();
         XWPFDocument doc = new XWPFDocument();
 
         writeLineToDocument(doc, $"Start: {reportDate}");
@@ -57,16 +59,19 @@ public class BugReporter
 
     public static void writeLineToDocument(XWPFDocument doc, string text)
     {
+        reportFile = new FileStream(pathReportDate + ".docx", FileMode.Open, FileAccess.Write);
         XWPFParagraph newLine = doc.CreateParagraph();
         XWPFRun run = newLine.CreateRun();
         run.SetText(text);
         doc.Write(reportFile);
+        reportFile.Close();
     }
 
     public static void addImageToDocument(XWPFDocument doc, string ImgPath)
     {
         XWPFParagraph newLine = doc.CreateParagraph();
         XWPFRun run = newLine.CreateRun();
+        reportFile = new FileStream(pathReportDate + ".docx", FileMode.Open, FileAccess.Write);
         try
         {
             FileStream imgStream = new FileStream(ImgPath, FileMode.Open, FileAccess.Read);
