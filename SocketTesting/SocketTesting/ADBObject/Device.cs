@@ -16,7 +16,7 @@ public class Device : ADBObject
     public int id;
     public int screenWidth { get; set; }
     public int screenHeight { get; set; }
-    public int gameWidth {get; set; }
+    public int gameWidth { get; set; }
     public int gameHeight { get; set; }
     public string adbName { get; set; }
     Process process = new Process();
@@ -25,27 +25,29 @@ public class Device : ADBObject
     public Device(int _id)
     {
         this.id = _id;
-        this.adbName = (string) WebSocket.configJSON[$"Device{id}"]["adbName"];
-        this.gameWidth = (int) WebSocket.configJSON["gameWidth"];
+        this.adbName = (string)WebSocket.configJSON[$"Device{id}"]["adbName"];
+        this.gameWidth = (int)WebSocket.configJSON["gameWidth"];
         this.gameHeight = (int)WebSocket.configJSON["gameHeight"];
-        process.StartInfo.FileName = "cmd.exe";
+        process.StartInfo.FileName = "adb.exe";
         process.StartInfo.UseShellExecute = false;
         process.StartInfo.RedirectStandardOutput = true;
         try
         {
-            process.StartInfo.Arguments = $"adb -s {adbName} shell wm size";
+            process.StartInfo.Arguments = $"-s {adbName} shell wm size";
             process.Start();
             process.WaitForExit();
         }
         catch (Exception ex)
         {
+            Console.WriteLine(ex);
             throw new Exception("Device not plugged in");
         }
-
         string result = process.StandardOutput.ReadToEnd();
-        this.screenWidth = Int32.Parse(result.Substring(result.LastIndexOf(' ') + 1, result.LastIndexOf('x')));
+        this.screenWidth = Int32.Parse(result.Substring(result.LastIndexOf(' ') + 1, result.LastIndexOf('x') - result.LastIndexOf(' ') - 1));
         this.screenHeight = Int32.Parse(result.Substring(result.LastIndexOf('x') + 1));
+        Console.WriteLine(screenWidth+ " " + screenHeight);
     }
+
 
     public static Device getInstance(int _id)
     {
@@ -73,7 +75,7 @@ public class Device : ADBObject
     public void openGame()
     {
         string packageName = (string)WebSocket.configJSON["packageName"];
-        process.StartInfo.Arguments = $"adb -s {adbName} shell monkey -p {packageName} 1";
+        process.StartInfo.Arguments = $"-s {adbName} shell monkey -p {packageName} 1";
         process.Start();
         process.WaitForExit();
     }
@@ -81,8 +83,9 @@ public class Device : ADBObject
     public void closeGame()
     {
         string packageName = (string)WebSocket.configJSON["packageName"];
-        process.StartInfo.Arguments = $"adb -s {adbName} shell am force-stop {packageName}";
+        process.StartInfo.Arguments = $"-s {adbName} shell am force-stop {packageName}";
         process.Start();
+        Console.WriteLine("Closing game");
         process.WaitForExit();
     }
 
@@ -92,7 +95,7 @@ public class Device : ADBObject
         if (pkt == null) throw new Exception("find package cannot be found.");
         if (!pkt.exist) throw new Exception($"gameObject name {filter} doesnt exist.");
         Vector2 gameObjectLocation = ScreenLocation(pkt.Posx, pkt.Posy);
-        process.StartInfo.Arguments = $"adb -s {adbName} shell input tap {gameObjectLocation.X} {gameObjectLocation.Y}";
+        process.StartInfo.Arguments = $"-s {adbName} shell input tap {gameObjectLocation.X} {gameObjectLocation.Y}";
         process.Start();
         process.WaitForExit();
     }
@@ -100,7 +103,7 @@ public class Device : ADBObject
     public void type(String text)
     {
         Thread.Sleep(100);
-        process.StartInfo.Arguments = $"adb -s {adbName} shell input text {text}";
+        process.StartInfo.Arguments = $"-s {adbName} shell input text {text}";
         process.Start();
         process.WaitForExit();
         Thread.Sleep(100);
@@ -109,7 +112,7 @@ public class Device : ADBObject
     public void removeText()
     {
         string eventCodes = "67"; //KEYCODE_DEL
-        process.StartInfo.Arguments = $"adb -s {adbName} shell input keyevent {eventCodes}";
+        process.StartInfo.Arguments = $"-s {adbName} shell input keyevent {eventCodes}";
         process.Start();
         process.WaitForExit();
         Thread.Sleep(200);
@@ -121,10 +124,10 @@ public class Device : ADBObject
         {
             string path = Directory.GetCurrentDirectory();
             string fileName = path + "\\Evidence\\" + DateTime.Now.ToString("yyyy’-‘MM’-‘dd’T’HH’:’mm’:’ss");
-            process.StartInfo.Arguments = $"adb -s {adbName} shell screencap -p /sdcard/temp.png";
+            process.StartInfo.Arguments = $"-s {adbName} shell screencap -p /sdcard/temp.png";
             process.Start();
             process.WaitForExit();
-            process.StartInfo.Arguments = $"adb -s {adbName} pull /sdcard/temp.png {fileName}";
+            process.StartInfo.Arguments = $"-s {adbName} pull /sdcard/temp.png {fileName}";
             process.Start();
             process.WaitForExit();
             Thread.Sleep(100);

@@ -52,6 +52,7 @@ public class TestCaseSheet
             {
                 try
                 {
+                    Console.WriteLine("executing");
                     step.execute();
                 } catch (Exception ex)
                 {

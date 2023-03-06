@@ -18,6 +18,7 @@ public class ADBDeviceSelector
             catch (Exception ex) {
                 throw new Exception("Device id isnt a number.");
             }
+
             return Device.getInstance(id);
         }
         else throw new Exception("Device not exist.");

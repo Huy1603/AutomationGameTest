@@ -19,6 +19,7 @@ public class BugReporter
         string path = Directory.GetParent(Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).FullName).FullName).FullName;
         string reportDate = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
         pathReportDate = path + "\\report\\" + reportDate;
+        Console.WriteLine(pathReportDate);
         reportFile = new FileStream(pathReportDate + ".docx", FileMode.Create, FileAccess.Write);
         reportFile.Close();
         XWPFDocument doc = new XWPFDocument();

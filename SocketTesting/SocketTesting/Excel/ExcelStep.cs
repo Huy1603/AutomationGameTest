@@ -86,16 +86,13 @@ public class ExcelStep
         return clone;
     }
 
-    public void execute()
+    public void executeWithParam()
     {
         ADBObject obj = ADBDeviceSelector.GetADBObject(this.driver);
         Type type = obj.GetType();
         Type[] paramsType = null;
-        if (Params != null)
-        {
-            paramsType = new Type[Params.Length];
-            Array.Fill(paramsType, typeof(string));
-        }
+        paramsType = new Type[Params.Length];
+        Array.Fill(paramsType, typeof(string));
         MethodInfo method;
         try
         {
@@ -114,6 +111,37 @@ public class ExcelStep
             setEvidence();
             throw new Exception(this.setStepID + TestCaseSheet.bugStepIDAndDescriptionSeparator + ex);
         }
+    }
+
+    public void executeWithoutParam()
+    {
+        ADBObject obj = ADBDeviceSelector.GetADBObject(this.driver);
+        Type type = obj.GetType();
+        Type[] paramsType = null;
+        MethodInfo method;
+        try
+        {
+            method = type.GetMethod(action);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"input might wrong, can not find method {action} at step {stepID}.");
+        }
+        try
+        {
+            method.Invoke(obj, Params);
+        }
+        catch (Exception ex)
+        {
+            setEvidence();
+            throw new Exception(this.setStepID + TestCaseSheet.bugStepIDAndDescriptionSeparator + ex);
+        }
+    }
+
+    public void execute()
+    {
+        if(Params == null) executeWithoutParam();
+        else executeWithParam();
     }
 
     public override string ToString()

@@ -48,6 +48,7 @@ public class StatusSheet{
                 case COLUMN_INDEX_STATUS:
                     if (cellValue.ToString().Equals("test"))
                     {
+                        Console.WriteLine(cellValue);
                         targetedTestCaseList.Add(cellValue.ToString());
                         continue;
                     }

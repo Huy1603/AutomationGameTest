@@ -14,26 +14,28 @@ public class WebSocket
 {
     private const int BUFFER_SIZE = 1024;
     private const int PORT_NUMBER = 5000;
-    IPAddress address = IPAddress.Parse("127.0.0.1");
     static ASCIIEncoding encoding = new ASCIIEncoding();
     static TcpClient client = new TcpClient();
     static Stream stream;
-    public static JObject configJSON = JObject.Parse(File.ReadAllText(@"config\config.json"));
+    public static JObject configJSON;
 
     static void Main()
     {
         try
         {
-            // Connect to the server
-            //IPAddress address = IPAddress.Parse("127.0.0.1");
+            string currentDirectory = Directory.GetParent(Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).FullName).FullName).FullName;
+            string excelFilepath = currentDirectory + "\\excelfile\\ExcelFile.xlsx";
+            string jsonFilepath = currentDirectory + "\\config\\config.json";
+            StreamReader file = File.OpenText(jsonFilepath);
+            JsonTextReader reader = new JsonTextReader(file);
+            configJSON = (JObject)JToken.ReadFrom(reader);
 
             //Set up socket server
-/*            IPAddress address = IPAddress.Parse((string) configJSON["Device"]["IPAddress"]);
+            Console.WriteLine((string)configJSON[$"Device{1}"]["IPAddress"]);
+            IPAddress address = IPAddress.Parse((string) configJSON[$"Device{1}"]["IPAddress"]);
+            address = IPAddress.Parse("127.0.0.1");
             client.Connect(address, PORT_NUMBER);
-            stream = client.GetStream();*/
-            string currentDirectory = Directory.GetParent(Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).FullName).FullName).FullName;
-            Console.WriteLine(currentDirectory);
-            string excelFilepath = currentDirectory + "\\excelfile\\ExcelFile.xlsx";
+            stream = client.GetStream();
             try
             {
                 ReadAndExecuteExcel.readExcel(excelFilepath);
@@ -89,6 +91,7 @@ public class WebSocket
             action = "find"
         };
         string jsonstring = JsonConvert.SerializeObject(pkt);
+        Console.WriteLine(jsonstring);
         WebSocket.SendPackage(PackageDefine.PKT_FIND, jsonstring);
         string response = WebSocket.GetResponse();
         Console.WriteLine(response);
